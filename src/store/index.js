@@ -1,14 +1,8 @@
-import { createStore } from 'vuex'
+import Vuex from 'vuex'
+import employee from "@/store/modules/employee";
 
-export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
+export default new Vuex.Store({
   modules: {
+    employee
   }
 })

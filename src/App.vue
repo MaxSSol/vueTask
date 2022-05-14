@@ -1,30 +1,38 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div class="main">
+    <div v-show="getVisibleStatus">
+      <create-employee-form></create-employee-form>
+      <button class="btn btn-warning" @click="addEmployee">Скрити</button>
+    </div>
+    <button class="btn btn-primary" @click="addEmployee" v-show="!getVisibleStatus">Додати співробітника</button>
+  </div>
+  <div>
+    <employee-list></employee-list>
+  </div>
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+.main {
+  max-width: 1170px;
+  margin: 10px auto 0 auto;
 }
 </style>
+<script>
+import createEmployeeForm from "@/components/CreateEmployeeForm";
+import EmployeeList from "@/components/EmployeeList";
+import {mapGetters} from 'vuex'
+
+
+export default {
+  components: {
+    EmployeeList,
+    createEmployeeForm,
+  },
+  computed: mapGetters(['getVisibleStatus']),
+  methods: {
+    addEmployee() {
+      this.$store.commit('changeVisibleForm')
+    }
+  }
+}
+</script>
